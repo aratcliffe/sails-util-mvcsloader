@@ -4,7 +4,9 @@
 
 var buildDictionary = require('sails-build-dictionary');
 
-module.exports = function (sails, dir, cb) {
+module.exports = function (sails, dir, orm, cb) {
+    orm = orm || 'orm';
+    
     buildDictionary.optional({
         dirname: dir,
         filter: /^([^.]+)\.(js|coffee|litcoffee)$/,
@@ -27,7 +29,7 @@ module.exports = function (sails, dir, cb) {
             }
 
             var finalModels = sails.util.merge(models, supplements);
-            sails.hooks.orm.models = sails.util.merge(finalModels || {}, sails.hooks.orm.models || {});
+            sails.hooks[orm].models = sails.util.merge(finalModels || {}, sails.hooks[orm].models || {});
             sails.models = sails.util.merge(finalModels || {}, sails.models || {});
 
             cb();

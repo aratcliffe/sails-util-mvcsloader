@@ -1,6 +1,6 @@
 var async = require('async');
 
-module.exports = function (sails) {
+module.exports = function (sails, orm) {
 
     if(!sails) {
         console.log('Warning! The Sails app injected into sails-util-mvcsloader seems invalid.');
@@ -22,7 +22,7 @@ module.exports = function (sails) {
         },
 
         injectModels: function (dir, cb) {
-            require(__dirname + '/libs/models')(sails, dir, cb);
+            require(__dirname + '/libs/models')(sails, dir, orm, cb);
         },
 
         injectServices: function (dir, cb) {
